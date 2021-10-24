@@ -197,10 +197,23 @@ def validate_student():
         p = Participant.query.filter_by(student_validation=request.args['student']).first()
         if p:
             # send mail
-            send_mail(p, Validation.STUDENT)
+            if not p.student_validated:
+                send_mail(p, Validation.STUDENT)
             # return page with button to resend mail for student validation
             return render_template('templates/success.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, participant=p)
     return render_template('templates/success.html', student_validation='', trainer_validation='', participant='')
+
+
+@app.route('/send_mail', methods=['GET'])
+def send_mail_again():
+    if 'student' in request.args:
+        p = Participant.query.filter_by(student_validation=request.args['student']).first()
+        if p:
+            # send mail
+            send_mail(p, Validation.STUDENT)
+            # return page with button to resend mail for student validation
+            return render_template('templates/simple_message.html', success=True, message='Die Bestätigungsmail wurde ein weiteres Mal versendet.', title='Bestätigungsmail versenden')
+    return render_template('templates/simple_message.html', success=False, message='Die Bestätigungsmail konnte nicht versendet werden!', title='Bestätigungsmail versenden')
 
 
 @app.route('/do_validate_student', methods=['GET'])
@@ -232,6 +245,17 @@ def do_validate_trainer():
             return render_template('templates/trainer_validated.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, username=p.username)
     abort(400)
     #return render_template('templates/trainer_validated.html', student_validation='', trainer_validation='', username='')   
+
+
+@app.route('/delete_registration', methods=['GET'])
+def delete_registration():
+    if 'student' in request.args:
+        p = Participant.query.filter_by(student_validation=request.args['student']).first()
+        if p:
+            db.session.delete(p)
+            db.session.commit()
+            return render_template('templates/simple_message.html', success=True, message='Anmeldung wurde erfolgreich gelöscht!', title='Anmeldung löschen')
+    return render_template('templates/simple_message.html', success=False, message='Die Anmeldung konnte nicht gelöscht werden!', title='Anmeldung löschen')
 
 
 @app.errorhandler(404)
