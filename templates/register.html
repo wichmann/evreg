@@ -38,11 +38,11 @@
                     {{ form.email_student(class="form-control") }}
                 </div>
                 {% if form.email_student.errors %}
-                    <div class="errors"><ul>
+                    <div class="errors">
                     {% for error in form.email_student.errors %}
-                        <li>{{ error }}</li>
+                        {{ error }}
                     {% endfor %}
-                    </ul></div>
+                    </div>
                 {% endif %}
                 </div>
                 
@@ -76,11 +76,11 @@
                     {{ form.email_trainer(class="form-control") }}
                 </div>
                 {% if form.email_trainer.errors %}
-                    <div class="errors"><ul>
+                    <div class="errors">
                     {% for error in form.email_trainer.errors %}
-                        <li>{{ error }}</li>
+                        {{ error }}
                     {% endfor %}
-                    </ul></div>
+                    </div>
                 {% endif %}
                 </div>
 
