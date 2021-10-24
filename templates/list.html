@@ -1,0 +1,46 @@
+{% extends 'templates/layout.html' %}
+
+{% block title %}Teilnehmerliste{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="page-header">
+                <h1>Liste der Teilnehmer</h1>
+            </div>
+         
+            <div>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name der/des Auszubildenden</th>
+                    <th>Klasse</th>
+                    <th>Email-Adresse Auszubildende(r)</th>
+                    <th>Betrieb</th>
+                    <th>Ausbilder(in)</th>
+                    <th>Email-Adresse Ausbilder(in)</th>
+                    <th>Bestätigung Auszubildende(r)</th>
+                    <th>Bestätigung Ausbilder(in)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in list_of_participants %}
+                  <tr>
+                    <td>{{p.id}}</td>
+                    <td>{{p.username}}</td>
+                    <td>{{p.classname}}</td>
+                    <td>{{p.email_student}}</td>
+                    <td>{{p.company_name}}</td>
+                    <td>{{p.trainer_name}}</td>
+                    <td>{{p.email_trainer}}</td>
+                    <td>{{p.student_validated}}</td>
+                    <td>{{p.trainer_validated}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+        </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'templates/layout.html' %}
+
+{% block title %}Bestätigung Auszubildende(r){% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Bestätigung Auszubildende(r)</h1>
+    </div>
+            {% if not student_validation or not trainer_validation %}
+            <h2>Problem!</h2>
+            <p>Fehlerhafter Aufruf der Seite!</p>
+            {% else %}
+            <h2>Erfolg!</h2>
+            <p>1. Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2021 der Berufsbildenden Schulen Brinkstraße!</p>
+            <div class="panel panel-default">
+                <div class="panel-heading">Gespeicherte Informationen</div>
+                <div class="panel-body">
+                    <ul id="participant">
+                        <li>
+                          <span class="field-name">User:</span>
+                          <span class="field-value">{{ participant.username }}</span>
+                        </li>
+                        <li>
+                          <span class="field-name">Email:</span>
+                          <span class="field-value"></span>
+                        </li>
+                        <li>
+                          <span class="field-name">Created:</span>
+                          <span class="field-value"></span>
+                        </li>
+                        <li>
+                          <span class="field-name">Bio:</span>
+                          <span class="field-value"></span>
+                        </li>
+                        <li>
+                          <span class="field-name">Admin:</span>
+                          <span class="field-value"></span>
+                        </li>
+                      </ul>
+                </div>
+              </div>
+            <p>2. Bitte kopieren Sie sich den folgenden Link: <a href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student', _external=True, student=student_validation)}}</a>.
+            Damit können Sie später wieder auf Ihre gespeicherten Daten zugreifen, sich abmelden oder die Bestätigungsmail noch einmal senden.</p>
+            <p>3. Als nächstes bekommen Sie eine Email mit einem Bestätigungslink, den Sie anklicken müssen, um die Email-Adresse zu bestätigen.</p>
+            <p>4. Danach bekommt Ihre Ausbilderin bzw. Ihr Ausbilder eine Email, in der die Teilnahme bestätigt werden muss.</p>
+            {% endif %}
+        </div>
+{% endblock %}
