@@ -13,3 +13,4 @@ To start the web app with the internal web server of Flask:
 * flask-wtf
 * flask-sqlalchemy
 * flask-bootstrap
+* email-validator

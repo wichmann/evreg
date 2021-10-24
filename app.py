@@ -47,6 +47,7 @@ def init_app():
     app.config['RECAPTCHA_PRIVATE_KEY'] = config.RECAPTCHA_PRIVATE_KEY
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['WTF_CSRF_SSL_STRICT'] = False
 
     csrf.init_app(app)
     db.init_app(app)
@@ -110,7 +111,7 @@ class Validation(Enum):
     TRAINER = 2
     
 
-@app.route('/register', methods=('GET', 'POST'))
+@app.route('/register', methods=['GET', 'POST'])
 def index():
     form = RegisterStudentForm()
     if form.validate_on_submit():
