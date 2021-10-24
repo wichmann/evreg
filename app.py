@@ -98,8 +98,9 @@ def contact():
 
 @app.route('/list', methods=['GET'])
 def list_participants():
-    # TODO: Secure this endpoint by providing a secure passphrase as URL GET parameter.
-    list_of_participants = Participant.query.all()
+    list_of_participants = []
+    if 'password' in request.args and request.args['password'] == config.SHOW_LIST_PASSWORD:
+        list_of_participants = Participant.query.all()
     return render_template('templates/list.html', list_of_participants=list_of_participants)
 
 
