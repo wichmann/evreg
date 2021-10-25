@@ -16,12 +16,14 @@ Sources:
 
 """
 
+import csv
 import uuid
 import smtplib
+from io import StringIO, BytesIO
 from email.message import EmailMessage
 from email.headerregistry import Address
 
-from flask import Flask, render_template, redirect, request, make_response, abort
+from flask import Flask, render_template, redirect, request, make_response, abort, send_file
 from flask.helpers import url_for
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.csrf import CSRFProtect
@@ -103,6 +105,20 @@ def list_participants():
     if 'password' in request.args and request.args['password'] == config.SHOW_LIST_PASSWORD:
         list_of_participants = Participant.query.all()
     return render_template('templates/list.html', list_of_participants=list_of_participants)
+
+
+@app.route('/download_list', methods=['GET'])
+def download_list():
+    if 'password' in request.args and request.args['password'] == config.SHOW_LIST_PASSWORD:
+        list_of_participants = Participant.query.all()
+        csv_file = StringIO()
+        outcsv = csv.writer(csv_file)
+        outcsv.writerow([column.name for column in Participant.__mapper__.columns])
+        for p in list_of_participants:
+            outcsv.writerow([getattr(p, column.name) for column in Participant.__mapper__.columns])
+        csv_file.seek(0)
+        return send_file(BytesIO(csv_file.read().encode('utf-8')), attachment_filename='teilnehmerliste.csv')
+    return abort(403)
 
 
 from enum import Enum
