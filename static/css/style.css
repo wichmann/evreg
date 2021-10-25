@@ -13,6 +13,9 @@ h1 {
     width: 100%;
     text-align: center;
     background: #e1eaf5;
+    padding: 15px;
+    box-sizing: border-box;
+    min-height: 15px;
 }
 
 .errors {
@@ -34,10 +37,12 @@ h1 {
   margin-bottom: 100px;
 }
 
+#footer-text{
+  display: inline-block; 
+}
+
 #school-logo {
-    position: fixed;
-    bottom: 90px;
-    right: 15px;
+  float: right;  
 }
 
 label {
