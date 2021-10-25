@@ -75,7 +75,7 @@ class RegisterStudentForm(FlaskForm):
                            validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
     email_trainer = StringField(label=('Email-Adresse Ausbilder(in)'), 
                                 validators=[DataRequired(), Email(message='Keine gültige Email-Adresse!'), Length(max=120)])
-    #recaptcha = RecaptchaField()
+    recaptcha = RecaptchaField()
     submit = SubmitField(label=('Submit'))
 
 
