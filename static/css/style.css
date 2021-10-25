@@ -32,6 +32,20 @@ h1 {
     height: fit-content;
 }
 
+.success {
+  padding: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  list-style: none;
+  background: greenyellow;
+  border-radius: 4px;
+  border-top: 0;
+  color: darkcyan;
+  height: fit-content;
+}
+
 #mainblock {
   margin-top: 50px;
   margin-bottom: 100px;

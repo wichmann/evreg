@@ -131,6 +131,7 @@ class Validation(Enum):
 def index():
     form = RegisterStudentForm()
     if form.validate_on_submit():
+        # TODO: Add better check for valid class names?
         student_validation = uuid.uuid4()
         register_new_student(student_validation, form.username, form.classname, form.email_student, form.email_trainer, form.company_name, form.trainer_name)
         return redirect(url_for('validate_student', student=student_validation.hex))
@@ -248,7 +249,7 @@ def do_validate_student():
                 send_mail(p, Validation.TRAINER)
             # return page with information that trainer has to be validated next
             return render_template('templates/student_validated.html', participant=p)
-    abort(400)
+    return render_template('templates/student_validated.html', participant=None)
 
 
 @app.route('/do_validate_trainer', methods=['GET'])
@@ -262,8 +263,8 @@ def do_validate_trainer():
             db.session.commit()
             # return page saying the process is completed
             return render_template('templates/trainer_validated.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, username=p.username)
-    abort(400)
-    #return render_template('templates/trainer_validated.html', student_validation='', trainer_validation='', username='')   
+    #abort(400)
+    return render_template('templates/trainer_validated.html', student_validation='', trainer_validation='', username='')
 
 
 @app.route('/delete_registration', methods=['GET'])
