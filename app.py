@@ -244,7 +244,8 @@ def do_validate_student():
             p.student_validated = True
             db.session.commit()
             # send mail
-            send_mail(p, Validation.TRAINER)
+            if not p.trainer_validated:
+                send_mail(p, Validation.TRAINER)
             # return page with information that trainer has to be validated next
             return render_template('templates/student_validated.html', participant=p)
     abort(400)
