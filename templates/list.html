@@ -36,7 +36,11 @@
                     <td>{{p.email_trainer}}</td>
                     <td>{{p.student_validated}}</td>
                     <td>{{p.trainer_validated}}</td>
-                    <td><a target="_blank" href="{{url_for('delete_registration', student=p.student_validation)}}"><button type="button" class="btn btn-danger">X</button></a> </td>
+                    <td><a target="_blank" href="{{url_for('delete_registration', student=p.student_validation)}}">
+                      <button type="button" class="btn btn-danger">
+                        <span style="color: rgb(255, 255, 255);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon glyphicon-remove"></span>
+                      </button>
+                    </a> </td>
                   </tr>
                   {% endfor %}
                 </tbody>

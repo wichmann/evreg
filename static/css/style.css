@@ -18,6 +18,17 @@ h1 {
     min-height: 15px;
 }
 
+.initial-number {
+  padding: 2px 5px;
+  margin: 5px;
+  border-radius:8px;
+  color: white;
+  border: rgb(110, 138, 180);
+  background-color: rgb(110, 138, 180);
+  font-size: large;
+  border-style: solid;
+}
+
 .errors {
     padding: 5px;
     margin-left: 0px;

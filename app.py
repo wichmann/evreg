@@ -189,21 +189,6 @@ Berufsbildende Schulen Brinkstraße
     else:
         print('Error!!!')
 
-    # add html version
-    #msg.add_alternative("""\
-    #<html>
-    #<head></head>
-    #<body>
-    #    <p>Salut!</p>
-    #    <p>Cela ressemble à un excellent
-    #        <a href="http://www.yummly.com/recipe/Roasted-Asparagus-Epicurious-203718">
-    #            recipie
-    #        </a> déjeuner.
-    #    </p>
-    #</body>
-    #</html>
-    #""", subtype='html')
-
     # send the message via SMTP server.
     with smtplib.SMTP_SSL(config.EMAIL_SERVER_HOST, port=config.EMAIL_SERVER_PORT) as s:
         s.login(user=config.EMAIL_SERVER_USER, password = config.EMAIL_SERVER_PASSWORD)
