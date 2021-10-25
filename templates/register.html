@@ -85,10 +85,18 @@
                 </div>
 
                 {% if form.recaptcha %}
-                {{ form.recaptcha }}
-                {% for error in form.recaptcha.errors %}
-                    <small>{{ error }}</small>
-                {% endfor %}
+                <div class="form-group">
+                    {{ form.recaptcha }}
+                    <div class="errors">
+                    {% for error in form.recaptcha.errors %}
+                        {% if error == 'The response parameter is missing.' %}
+                            Captcha wurde nicht gelöst!
+                        {% else %}
+                            {{ error }}
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
                 {% endif %}
                 <div class="form-group">
                     {{ form.submit(class="btn btn-primary")}}
