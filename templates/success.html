@@ -50,8 +50,8 @@
     <p>3. Als nächstes bekommen Sie eine Email mit einem Bestätigungslink, den Sie anklicken müssen, um die Email-Adresse zu bestätigen.</p>
     <p>4. Danach bekommt Ihre Ausbilderin bzw. Ihr Ausbilder eine Email, in der die Teilnahme bestätigt werden muss.</p>
     <div>
-      <a target="_blank" href="{{url_for('send_mail_again', student=student_validation)}}"><button type="button" class="btn btn-lg btn-warning">Weitere Bestätigungsmail schicken</button></a>
-      <a target="_blank" href="{{url_for('delete_registration', student=student_validation)}}"><button type="button" class="btn btn-lg btn-danger">Anmeldung löschen</button></a>
+      <a target="_blank" href="{{url_for('send_mail_again', student=student_validation)}}"><button type="button" class="btn btn-warning">Weitere Bestätigungsmail schicken</button></a>
+      <a target="_blank" href="{{url_for('delete_registration', student=student_validation)}}"><button type="button" class="btn btn-danger">Anmeldung löschen</button></a>
     </div>
     {% endif %}
 </div>

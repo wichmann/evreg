@@ -21,6 +21,7 @@
                     <th>Email-Adresse Ausbilder(in)</th>
                     <th>Bestätigung Auszubildende(r)</th>
                     <th>Bestätigung Ausbilder(in)</th>
+                    <th>Eintrag löschen?</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,14 +36,13 @@
                     <td>{{p.email_trainer}}</td>
                     <td>{{p.student_validated}}</td>
                     <td>{{p.trainer_validated}}</td>
+                    <td><a target="_blank" href="{{url_for('delete_registration', student=p.student_validation)}}"><button type="button" class="btn btn-danger">X</button></a> </td>
                   </tr>
                   {% endfor %}
                 </tbody>
               </table>
             </div>
-
             <p><a href="{{url_for('download_list', password=request.args['password'])}}"><button type="button" class="btn btn-lg btn-success">Liste herunterladen</button></a></p>
-            
         </div>
 
 {% endblock %}
