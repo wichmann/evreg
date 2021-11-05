@@ -16,22 +16,22 @@
                     {{ form.firstname(class="form-control") }}
                 </div>
                 {% if form.firstname.errors %}
-                    <div class="errors"><ul>
+                    <div class="errors">
                     {% for error in form.firstname.errors %}
-                        <li>{{ error }}</li>
+                        {{ error }}
                     {% endfor %}
-                    </ul></div>
+                    </div>
                 {% endif %}
                 <div class="form-group">
                     {{ form.lastname.label }}
                     {{ form.lastname(class="form-control") }}
                 </div>
                 {% if form.lastname.errors %}
-                    <div class="errors"><ul>
+                    <div class="errors">
                     {% for error in form.lastname.errors %}
-                        <li>{{ error }}</li>
+                        {{ error }}
                     {% endfor %}
-                    </ul></div>
+                    </div>
                 {% endif %}
                 <div class="form-group">
                     {{ form.classname.label }}

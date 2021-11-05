@@ -80,10 +80,11 @@ class RegisterStudentForm(FlaskForm):
 
 
 def register_new_student(student_validation, firstname, lastname, classname, email_student, email_trainer, company_name, trainer_name):
-    # create new UUIDs that will be used for validation of mail addresses of student and trainer
+    # create new Participant with a new UUID for teacher validation...
     new_participant = Participant(firstname=firstname.data, lastname=lastname.data, classname=classname.data, email_student=email_student.data,
                                   company_name=company_name.data, trainer_name=trainer_name.data, email_trainer=email_trainer.data,
                                   student_validation=student_validation.hex, trainer_validation=uuid.uuid4().hex)
+    # ...and store her in the database
     db.session.add(new_participant)
     db.session.commit()
 
@@ -200,11 +201,11 @@ def validate_student():
     if 'student' in request.args:
         p = Participant.query.filter_by(student_validation=request.args['student']).first()
         if p:
-            # send mail
-            if not p.student_validated:
-                send_mail(p, Validation.STUDENT)
-            # return page with button to resend mail for student validation
             if 'firsttime' in request.args:
+                if not p.student_validated:
+                    # send mail only if student was not validated already
+                    send_mail(p, Validation.STUDENT)
+                # return page with button to resend mail for student validation
                 return render_template('templates/success.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, participant=p, firsttime=True)
             else:
                 return render_template('templates/success.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, participant=p)
