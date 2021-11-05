@@ -30,14 +30,12 @@ from flask_wtf.csrf import CSRFProtect
 from wtforms import StringField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Length, Email
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
 
 import config
 from model import db, Participant
 
 
 csrf = CSRFProtect()
-bs = Bootstrap()
 
 def init_app():
     """Initialize the core application."""
@@ -53,7 +51,6 @@ def init_app():
 
     csrf.init_app(app)
     db.init_app(app)
-    bs.init_app(app)
     with app.app_context():
         db.create_all() 
         return app
@@ -63,10 +60,13 @@ app = init_app()
 
 
 class RegisterStudentForm(FlaskForm):
-    username = StringField(label=('Name:'),
+    # build a HTML form corresponding to the data model in module model.py
+    firstname = StringField(label=('Vorname:'),
+                           validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
+    lastname = StringField(label=('Nachname:'),
                            validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
     classname = StringField(label=('Klasse:'),
-                           validators=[DataRequired(), Length(min=5, max=7, message='Klassenbezeichnung muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
+                            validators=[DataRequired(), Length(min=4, max=8, message='Klassenbezeichnung muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
     email_student = StringField(label=('Email-Adresse Auszubildende(r)'), 
                                 validators=[DataRequired(), Email(message='Keine gültige Email-Adresse!'), Length(max=120)])
     company_name = StringField(label=('Name des Ausbildungsbetriebs:'),
@@ -79,9 +79,9 @@ class RegisterStudentForm(FlaskForm):
     submit = SubmitField(label=('Submit'))
 
 
-def register_new_student(student_validation, username, classname, email_student, email_trainer, company_name, trainer_name):
+def register_new_student(student_validation, firstname, lastname, classname, email_student, email_trainer, company_name, trainer_name):
     # create new UUIDs that will be used for validation of mail addresses of student and trainer
-    new_participant = Participant(username=username.data, classname=classname.data, email_student=email_student.data,
+    new_participant = Participant(firstname=firstname.data, lastname=lastname.data, classname=classname.data, email_student=email_student.data,
                                   company_name=company_name.data, trainer_name=trainer_name.data, email_trainer=email_trainer.data,
                                   student_validation=student_validation.hex, trainer_validation=uuid.uuid4().hex)
     db.session.add(new_participant)
@@ -133,7 +133,7 @@ def index():
     if form.validate_on_submit():
         # TODO: Add better check for valid class names?
         student_validation = uuid.uuid4()
-        register_new_student(student_validation, form.username, form.classname, form.email_student, form.email_trainer, form.company_name, form.trainer_name)
+        register_new_student(student_validation, form.firstname, form.lastname, form.classname, form.email_student, form.email_trainer, form.company_name, form.trainer_name)
         return redirect(url_for('validate_student', student=student_validation.hex, firsttime=True))
     return render_template('templates/register.html', form=form)
 
@@ -148,7 +148,7 @@ def send_mail(participant, message_type):
     msg['From'] = Address(config.EMAIL_SENDER_NAME, config.EMAIL_SENDER_USER, config.EMAIL_SENDER_DOMAIN)
     if message_type == Validation.STUDENT:
         user, domain = participant.email_student.split('@')
-        msg['To'] = (Address(participant.username, user, domain))
+        msg['To'] = (Address(participant.get_full_name(), user, domain))
     elif message_type == Validation.TRAINER:
         user, domain = participant.email_trainer.split('@')
         msg['To'] = (Address(participant.trainer_name, user, domain))
@@ -168,13 +168,13 @@ Nach dem Klick auf den Bestätigungslink wird als nächstes eine Email an Ihre A
 Mit freundlichen Grüßen
 
 Berufsbildende Schulen Brinkstraße
-        """.format(username=participant.username, validation_link=url_for('do_validate_student', _external=True, student=participant.student_validation)))
+        """.format(username=participant.get_full_name(), validation_link=url_for('do_validate_student', _external=True, student=participant.student_validation)))
     elif message_type == Validation.TRAINER:
         msg.set_content("""Hallo {trainer_name},
 
 Ihre Auszubildende bzw. Ihr Auszubildender {username} hat sich für die Excellence Initiative der BBS Brinkstraße angemeldet. Dabei geht es um eine AG mit dem Thema "Weiterentwicklung einer Smart Factory und Abbildung der wesentliche Prinzipien des Produktionsprozesses mit einem Projektmanagement nach dem Kanban-Prinzip". Weitere Informationen finden Sie auf der Homepage unter dem Link {info_link}.
         
-Eine Teilnahme bedeutet einen weiteren Berufsschultag für die Auszubildenden. Dazu ist natürlich auch das Einverständnis der Ausbildenden notwendig!
+Eine Teilnahme bedeutet einen weiteren Berufsschultag für die Auszubildenden. Dazu ist natürlich Ihr Einverständnis notwendig!
         
 Wenn Sie damit einverstanden sind, dass Ihre Auszubildende bzw. Ihr Auszubildender {username} an der Excellence Initiative teilnehmen darf, klicken Sie bitte zur Bestätigung der Anmeldung auf den folgenden Link:
 
@@ -183,7 +183,7 @@ Wenn Sie damit einverstanden sind, dass Ihre Auszubildende bzw. Ihr Auszubildend
 Mit freundlichen Grüßen
 
 Berufsbildende Schulen Brinkstraße
-        """.format(trainer_name=participant.trainer_name, username=participant.username,
+        """.format(trainer_name=participant.trainer_name, username=participant.get_full_name(),
                    info_link=url_for('info', _external=True),
                    validation_link=url_for('do_validate_trainer', _external=True, trainer=participant.trainer_validation)))
     else:
@@ -250,8 +250,7 @@ def do_validate_trainer():
             p.trainer_validated = True
             db.session.commit()
             # return page saying the process is completed
-            return render_template('templates/trainer_validated.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, username=p.username)
-    #abort(400)
+            return render_template('templates/trainer_validated.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, username=p.get_full_name())
     return render_template('templates/trainer_validated.html', student_validation='', trainer_validation='', username='')
 
 

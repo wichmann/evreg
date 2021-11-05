@@ -3,50 +3,52 @@
 {% block title %}Teilnehmerliste{% endblock %}
 
 {% block content %}
-        <div class="container">
-            <div class="page-header">
-                <h1>Liste der Teilnehmer</h1>
-            </div>
-         
-            <div>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name der/des Auszubildenden</th>
-                    <th>Klasse</th>
-                    <th>Email-Adresse Auszubildende(r)</th>
-                    <th>Betrieb</th>
-                    <th>Ausbilder(in)</th>
-                    <th>Email-Adresse Ausbilder(in)</th>
-                    <th>Bestätigung Auszubildende(r)</th>
-                    <th>Bestätigung Ausbilder(in)</th>
-                    <th>Eintrag löschen?</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for p in list_of_participants %}
-                  <tr>
-                    <td>{{p.id}}</td>
-                    <td>{{p.username}}</td>
-                    <td>{{p.classname}}</td>
-                    <td>{{p.email_student}}</td>
-                    <td>{{p.company_name}}</td>
-                    <td>{{p.trainer_name}}</td>
-                    <td>{{p.email_trainer}}</td>
-                    <td>{{p.student_validated}}</td>
-                    <td>{{p.trainer_validated}}</td>
-                    <td><a target="_blank" href="{{url_for('delete_registration', student=p.student_validation)}}">
-                      <button type="button" class="btn btn-danger">
-                        <span style="color: rgb(255, 255, 255);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon glyphicon-remove"></span>
-                      </button>
-                    </a> </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            <p><a href="{{url_for('download_list', password=request.args['password'])}}"><button type="button" class="btn btn-lg btn-success">Liste herunterladen</button></a></p>
+    <div class="container">
+        <div class="page-header">
+            <h1>Liste der Teilnehmer</h1>
         </div>
+      
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Vorname der/des Auszubildenden</th>
+                <th>Nachname der/des Auszubildenden</th>
+                <th>Klasse</th>
+                <th>Email-Adresse Auszubildende(r)</th>
+                <th>Betrieb</th>
+                <th>Ausbilder(in)</th>
+                <th>Email-Adresse Ausbilder(in)</th>
+                <th>Bestätigung Auszubildende(r)</th>
+                <th>Bestätigung Ausbilder(in)</th>
+                <th>Eintrag löschen?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in list_of_participants %}
+              <tr>
+                <td>{{p.id}}</td>
+                <td>{{p.firstname}}</td>
+                <td>{{p.lastname}}</td>
+                <td>{{p.classname}}</td>
+                <td>{{p.email_student}}</td>
+                <td>{{p.company_name}}</td>
+                <td>{{p.trainer_name}}</td>
+                <td>{{p.email_trainer}}</td>
+                <td>{{p.student_validated}}</td>
+                <td>{{p.trainer_validated}}</td>
+                <td><a target="_blank" href="{{url_for('delete_registration', student=p.student_validation)}}">
+                  <button type="button" class="btn btn-danger">
+                    <span style="color: rgb(255, 255, 255);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon glyphicon-remove"></span>
+                  </button>
+                </a> </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p><a href="{{url_for('download_list', password=request.args['password'])}}"><button type="button" class="btn btn-lg btn-success">Liste herunterladen</button></a></p>
+    </div>
 
 {% endblock %}

@@ -12,12 +12,23 @@
                 <h3>Daten der Auszubildenden bzw. des Auszubildenden</h3>
                 <div>
                 <div class="form-group">
-                    {{ form.username.label }}
-                    {{ form.username(class="form-control") }}
+                    {{ form.firstname.label }}
+                    {{ form.firstname(class="form-control") }}
                 </div>
-                {% if form.username.errors %}
+                {% if form.firstname.errors %}
                     <div class="errors"><ul>
-                    {% for error in form.username.errors %}
+                    {% for error in form.firstname.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                    </ul></div>
+                {% endif %}
+                <div class="form-group">
+                    {{ form.lastname.label }}
+                    {{ form.lastname(class="form-control") }}
+                </div>
+                {% if form.lastname.errors %}
+                    <div class="errors"><ul>
+                    {% for error in form.lastname.errors %}
                         <li>{{ error }}</li>
                     {% endfor %}
                     </ul></div>
