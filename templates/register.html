@@ -98,6 +98,7 @@
                 {% if form.recaptcha %}
                 <div class="form-group">
                     {{ form.recaptcha }}
+                    {% if form.email_trainer.errors %}
                     <div class="errors">
                     {% for error in form.recaptcha.errors %}
                         {% if error == 'The response parameter is missing.' %}
@@ -107,6 +108,7 @@
                         {% endif %}
                     {% endfor %}
                     </div>
+                    {% endif %}
                 </div>
                 {% endif %}
                 <div class="form-group">
