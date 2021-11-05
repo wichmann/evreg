@@ -40,7 +40,7 @@
                 <td>{{p.trainer_validated}}</td>
                 <td><a target="_blank" href="{{url_for('delete_registration', student=p.student_validation)}}">
                   <button type="button" class="btn btn-danger">
-                    <span style="color: rgb(255, 255, 255);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon glyphicon-remove"></span>
+                    <span style="color: rgb(255, 255, 255);text-shadow: 1px 1px #797979; font-weight: bold;" class="glyphicon glyphicon glyphicon-remove"></span>
                   </button>
                 </a> </td>
               </tr>
@@ -48,7 +48,7 @@
             </tbody>
           </table>
         </div>
-        <p><a href="{{url_for('download_list', password=request.args['password'])}}"><button type="button" class="btn btn-lg btn-success">Liste herunterladen</button></a></p>
+        <p><a href="{{url_for('download_list', password=request.args['password'])}}"><button type="button" class="btn btn-success">Liste herunterladen</button></a></p>
     </div>
 
 {% endblock %}
