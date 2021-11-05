@@ -98,7 +98,12 @@
         </div>
 
       <div>
-        <a target="_blank" href="{{url_for('send_mail_again', student=student_validation)}}"><button type="button" class="btn btn-warning">Weitere Bestätigungsmail schicken</button></a>
+        {% if not participant.student_validated %}
+        <a target="_blank" href="{{url_for('send_mail_again', student=student_validation)}}"><button type="button" class="btn btn-warning">Bestätigungsmail Auszubildende(r) schicken</button></a>
+        {% endif %}
+        {% if participant.student_validated and not participant.trainer_validated %}
+        <a target="_blank" href="{{url_for('send_mail_again', trainer=trainer_validation)}}"><button type="button" class="btn btn-warning">Bestätigungsmail Ausbilder(in) schicken</button></a>
+        {% endif %}
         <a target="_blank" href="{{url_for('delete_registration', student=student_validation)}}"><button type="button" class="btn btn-danger">Anmeldung löschen</button></a>
       </div>
     {% endif %}

@@ -221,6 +221,13 @@ def send_mail_again():
             send_mail(p, Validation.STUDENT)
             # return page with button to resend mail for student validation
             return render_template('templates/simple_message.html', success=True, message='Die Bestätigungsmail wurde ein weiteres Mal versendet.', title='Bestätigungsmail versenden')
+    elif 'trainer' in request.args:
+        p = Participant.query.filter_by(trainer_validation=request.args['trainer']).first()
+        if p:
+            # send mail
+            send_mail(p, Validation.TRAINER)
+            # return page with button to resend mail for student validation
+            return render_template('templates/simple_message.html', success=True, message='Die Bestätigungsmail wurde ein weiteres Mal versendet.', title='Bestätigungsmail versenden')        
     return render_template('templates/simple_message.html', success=False, message='Die Bestätigungsmail konnte nicht versendet werden!', title='Bestätigungsmail versenden')
 
 
