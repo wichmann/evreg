@@ -1,6 +1,7 @@
 
 import smtplib
 from enum import Enum
+from email.utils import formatdate
 from email.message import EmailMessage
 from email.headerregistry import Address
 
@@ -56,6 +57,7 @@ def send_mail(participant, message_type):
     msg = EmailMessage()
     msg['Subject'] = config.EMAIL_SUBJECT
     msg['From'] = Address(config.EMAIL_SENDER_NAME, config.EMAIL_SENDER_USER, config.EMAIL_SENDER_DOMAIN)
+    msg["Date"] = formatdate(localtime=True)
     if message_type == MessageType.STUDENT:
         user, domain = participant.email_student.split('@')
         msg['To'] = (Address(participant.get_full_name(), user, domain))
