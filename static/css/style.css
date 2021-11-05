@@ -1,5 +1,5 @@
 body {
-  background: lightgoldenrodyellow;
+  background: rgb(248, 248, 219);
   font-family: "Noto Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
 }
@@ -12,7 +12,7 @@ h1 {
     position: fixed;
     width: 100%;
     text-align: center;
-    background: #e1eaf5;
+    background: #edf2f8;
     padding: 15px;
     box-sizing: border-box;
     min-height: 15px;
@@ -57,6 +57,20 @@ h1 {
   height: fit-content;
 }
 
+.register-block {
+  margin-top: 3em;
+}
+
+.highlight-link {
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 10px;
+  /*border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;*/
+}
+
 #mainblock {
   margin-top: 50px;
   margin-bottom: 100px;
@@ -66,8 +80,12 @@ h1 {
   display: inline-block; 
 }
 
-#school-logo {
+#school-logo-right {
   float: right;  
+}
+
+#school-logo-left {
+  float: left;  
 }
 
 label {

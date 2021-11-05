@@ -13,10 +13,12 @@
         <p>Es wurde keine gültige Schüler-ID angegeben!</p>
       </div>
     {% else %}
-      <div class="success">
-        <h3>Erfolg!</h3>
-        <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2021 der Berufsbildenden Schulen Brinkstraße!</p>
-      </div>
+      {% if firsttime is defined %}
+        <div class="success">
+          <h3>Erfolg!</h3>
+          <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2021 der Berufsbildenden Schulen Brinkstraße!</p>
+        </div>
+      {% endif %}
       <div class="panel panel-default">
           <div class="panel-heading"><span class="initial-number">1.</span> Anmeldung wurde gespeichert. 
             <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon-ok"></span>
@@ -56,8 +58,12 @@
               <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon-ok"></span>
           </div>
           <div class="panel-body">
-            <p>Bitte kopieren Sie sich den folgenden Link: <a href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student', _external=True, student=student_validation)}}</a>.
-              Damit können Sie später wieder auf Ihre gespeicherten Daten zugreifen, sich abmelden oder die Bestätigungsmail noch einmal senden.</p>
+            <p>Bitte kopieren Sie sich den folgenden Link:
+              <span class="highlight-link"><a href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student', _external=True, student=student_validation)}}</a>
+                <button onclick="navigator.clipboard.writeText('{{url_for("validate_student", _external=True, student=student_validation)}}');"><span style="font-size: large;" class="glyphicon glyphicon-copy"></span></button>
+              </span>
+            </p>
+            <p>Damit können Sie später die gespeicherten Daten überprüfen, sich abmelden oder die Bestätigungsmail noch einmal senden.</p>
           </div>
         </div>
         

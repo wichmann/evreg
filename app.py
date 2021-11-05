@@ -134,7 +134,7 @@ def index():
         # TODO: Add better check for valid class names?
         student_validation = uuid.uuid4()
         register_new_student(student_validation, form.username, form.classname, form.email_student, form.email_trainer, form.company_name, form.trainer_name)
-        return redirect(url_for('validate_student', student=student_validation.hex))
+        return redirect(url_for('validate_student', student=student_validation.hex, firsttime=True))
     return render_template('templates/register.html', form=form)
 
 
@@ -204,7 +204,10 @@ def validate_student():
             if not p.student_validated:
                 send_mail(p, Validation.STUDENT)
             # return page with button to resend mail for student validation
-            return render_template('templates/success.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, participant=p)
+            if 'firsttime' in request.args:
+                return render_template('templates/success.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, participant=p, firsttime=True)
+            else:
+                return render_template('templates/success.html', student_validation=p.student_validation, trainer_validation=p.trainer_validation, participant=p)
     return render_template('templates/success.html', student_validation='', trainer_validation='', participant='')
 
 
