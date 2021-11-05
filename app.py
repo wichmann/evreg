@@ -133,9 +133,12 @@ def index():
     form = RegisterStudentForm()
     if form.validate_on_submit():
         # TODO: Add better check for valid class names?
-        student_validation = uuid.uuid4()
-        register_new_student(student_validation, form.firstname, form.lastname, form.classname, form.email_student, form.email_trainer, form.company_name, form.trainer_name)
-        return redirect(url_for('validate_student', student=student_validation.hex, firsttime=True))
+        p = Participant.query.filter_by(email_student=form.email_student.data).count()
+        form.email_student.errors.append('E-Mail-Adresse wurde bereits verwendet.')
+        if p == 0:
+            student_validation = uuid.uuid4()
+            register_new_student(student_validation, form.firstname, form.lastname, form.classname, form.email_student, form.email_trainer, form.company_name, form.trainer_name)
+            return redirect(url_for('validate_student', student=student_validation.hex, firsttime=True))
     return render_template('templates/register.html', form=form)
 
 

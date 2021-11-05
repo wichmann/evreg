@@ -16,5 +16,4 @@ Or run the App directly in the pipenv:
 * flask
 * flask-wtf
 * flask-sqlalchemy
-* flask-bootstrap
 * email-validator
