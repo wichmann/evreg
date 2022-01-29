@@ -38,7 +38,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 <li><a href="/info">Informationen</a></li>
-                <li><a href="/register">Anmeldung</a></li>
+                {% if config['ENLIST_OPEN'] %} <li><a href="/register">Anmeldung</a></li> {% endif %}
                 <li><a href="/contact">Ansprechpartner</a></li>
                 </ul>
             </div><!--/.nav-collapse -->

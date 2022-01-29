@@ -45,6 +45,7 @@ def init_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config['WTF_CSRF_SSL_STRICT'] = False
+    app.config['ENLIST_OPEN'] = config.ENLIST_OPEN
 
     csrf.init_app(app)
     db.init_app(app)
