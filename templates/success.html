@@ -5,107 +5,124 @@
 {% block content %}
 <div class="container">
   <div class="page-header">
-      <h1>Bestätigung Auszubildende(r)</h1>
+    <h1>Bestätigung Auszubildende(r)</h1>
   </div>
-    {% if not student_validation or not trainer_validation %}
-      <div class="errors">
-        <h3>Problem!</h3>
-        <p>Es wurde keine gültige Schüler-ID angegeben!</p>
-      </div>
-    {% else %}
-      {% if firsttime is defined %}
-        <div class="success">
-          <h3>Erfolg!</h3>
-          <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2021 der Berufsbildenden Schulen Brinkstraße!</p>
-        </div>
+  {% if not student_validation or not trainer_validation %}
+  <div class="errors">
+    <h3>Problem!</h3>
+    <p>Es wurde keine gültige Schüler-ID angegeben!</p>
+  </div>
+  {% else %}
+  {% if firsttime is defined %}
+  <div class="success">
+    <h3>Erfolg!</h3>
+    <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2023 der Berufsbildenden Schulen Brinkstraße!
+    </p>
+  </div>
+  {% endif %}
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="initial-number">1.</span> Anmeldung wurde gespeichert.
+      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;"
+        class="glyphicon glyphicon-ok"></span>
+    </div>
+    <div class="panel-body">
+      <ul id="participant">
+        <li>
+          <span class="field-name">Vorname :</span>
+          <span class="field-value">{{ participant.firstname }}</span>
+        </li>
+        <li>
+          <span class="field-name">Nachname :</span>
+          <span class="field-value">{{ participant.lastname }}</span>
+        </li>
+        <li>
+          <span class="field-name">Klasse:</span>
+          <span class="field-value">{{ participant.classname }}</span>
+        </li>
+        <li>
+          <span class="field-name">Email-Adresse Auszubildende(r):</span>
+          <span class="field-value">{{ participant.email_student }}</span>
+        </li>
+        <li>
+          <span class="field-name">Name des Ausbildungsbetriebs:</span>
+          <span class="field-value">{{ participant.company_name }}</span>
+        </li>
+        <li>
+          <span class="field-name">Name der Ausbilderin bzw. des Ausbilders:</span>
+          <span class="field-value">{{ participant.trainer_name }}</span>
+        </li>
+        <li>
+          <span class="field-name">Email-Adresse Ausbilder(in):</span>
+          <span class="field-value">{{ participant.email_trainer }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="initial-number">2.</span> Speichern des Links dieser Seite
+      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;"
+        class="glyphicon glyphicon-ok"></span>
+    </div>
+    <div class="panel-body">
+      <p>Bitte kopieren Sie sich den folgenden Link:
+        <span class="highlight-link"><a
+            href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student',
+            _external=True, student=student_validation)}}</a>
+          <button onclick="navigator.clipboard.writeText('{{url_for(" validate_student", _external=True,
+            student=student_validation)}}');"><span style="font-size: large;"
+              class="glyphicon glyphicon-copy"></span></button>
+        </span>
+      </p>
+      <p>Damit können Sie später die gespeicherten Daten überprüfen, sich abmelden oder die Bestätigungsmail noch einmal
+        senden.</p>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="initial-number">3.</span> Bestätigung der eigenen Email-Adresse
+      {% if participant.student_validated %}
+      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;"
+        class="glyphicon glyphicon-ok"></span>
+      {% else %}
+      <span style="color: rgb(255, 0, 0);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;"
+        class="glyphicon glyphicon glyphicon-remove"></span>
       {% endif %}
-      <div class="panel panel-default">
-          <div class="panel-heading"><span class="initial-number">1.</span> Anmeldung wurde gespeichert. 
-            <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon-ok"></span>
-          </div>
-          <div class="panel-body">
-              <ul id="participant">
-                  <li>
-                    <span class="field-name">Vorname :</span>
-                    <span class="field-value">{{ participant.firstname }}</span>
-                  </li>
-                  <li>
-                    <span class="field-name">Nachname :</span>
-                    <span class="field-value">{{ participant.lastname }}</span>
-                  </li>
-                  <li>
-                    <span class="field-name">Klasse:</span>
-                    <span class="field-value">{{ participant.classname }}</span>
-                  </li>
-                  <li>
-                    <span class="field-name">Email-Adresse Auszubildende(r):</span>
-                    <span class="field-value">{{ participant.email_student }}</span>
-                  </li>
-                  <li>
-                    <span class="field-name">Name des Ausbildungsbetriebs:</span>
-                    <span class="field-value">{{ participant.company_name }}</span>
-                  </li>
-                  <li>
-                    <span class="field-name">Name der Ausbilderin bzw. des Ausbilders:</span>
-                    <span class="field-value">{{ participant.trainer_name }}</span>
-                  </li>
-                  <li>
-                    <span class="field-name">Email-Adresse Ausbilder(in):</span>
-                    <span class="field-value">{{ participant.email_trainer }}</span>
-                  </li>
-                </ul>
-          </div>
-        </div>
+    </div>
+    <div class="panel-body">
+      <p>Als nächstes bekommen Sie eine Email mit einem Bestätigungslink, den Sie anklicken müssen, um die Email-Adresse
+        zu bestätigen.</p>
+    </div>
+  </div>
 
-        <div class="panel panel-default">
-          <div class="panel-heading"><span class="initial-number">2.</span> Speichern des Links dieser Seite
-              <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon-ok"></span>
-          </div>
-          <div class="panel-body">
-            <p>Bitte kopieren Sie sich den folgenden Link:
-              <span class="highlight-link"><a href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student', _external=True, student=student_validation)}}</a>
-                <button onclick="navigator.clipboard.writeText('{{url_for("validate_student", _external=True, student=student_validation)}}');"><span style="font-size: large;" class="glyphicon glyphicon-copy"></span></button>
-              </span>
-            </p>
-            <p>Damit können Sie später die gespeicherten Daten überprüfen, sich abmelden oder die Bestätigungsmail noch einmal senden.</p>
-          </div>
-        </div>
-        
-        <div class="panel panel-default">
-          <div class="panel-heading"><span class="initial-number">3.</span> Bestätigung der eigenen Email-Adresse
-            {% if participant.student_validated %}
-             <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon-ok"></span>
-            {% else %}
-             <span style="color: rgb(255, 0, 0);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon glyphicon-remove"></span>
-            {% endif %}
-          </div>
-          <div class="panel-body">
-            <p>Als nächstes bekommen Sie eine Email mit einem Bestätigungslink, den Sie anklicken müssen, um die Email-Adresse zu bestätigen.</p>
-          </div>
-        </div>
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="initial-number">4.</span> Bestätigung der der Anmeldung durch die
+      Ausbilderin bzw. den Ausbilder
+      {% if participant.trainer_validated %}
+      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;"
+        class="glyphicon glyphicon-ok"></span>
+      {% else %}
+      <span style="color: rgb(255, 0, 0);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;"
+        class="glyphicon glyphicon glyphicon-remove"></span>
+      {% endif %}
+    </div>
+    <div class="panel-body">
+      <p>Danach bekommt Ihre Ausbilderin bzw. Ihr Ausbilder eine Email, in der die Teilnahme bestätigt werden muss.</p>
+    </div>
+  </div>
 
-        <div class="panel panel-default">
-          <div class="panel-heading"><span class="initial-number">4.</span> Bestätigung der der Anmeldung durch die Ausbilderin bzw. den Ausbilder
-            {% if participant.trainer_validated %}
-              <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon-ok"></span>
-            {% else %}
-             <span style="color: rgb(255, 0, 0);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;" class="glyphicon glyphicon glyphicon-remove"></span>
-            {% endif %}
-          </div>
-          <div class="panel-body">
-            <p>Danach bekommt Ihre Ausbilderin bzw. Ihr Ausbilder eine Email, in der die Teilnahme bestätigt werden muss.</p>
-          </div>
-        </div>
-
-      <div>
-        {% if not participant.student_validated %}
-        <a target="_blank" href="{{url_for('send_mail_again', student=student_validation)}}"><button type="button" class="btn btn-warning">Bestätigungsmail Auszubildende(r) schicken</button></a>
-        {% endif %}
-        {% if participant.student_validated and not participant.trainer_validated %}
-        <a target="_blank" href="{{url_for('send_mail_again', trainer=trainer_validation)}}"><button type="button" class="btn btn-warning">Bestätigungsmail Ausbilder(in) schicken</button></a>
-        {% endif %}
-        <a target="_blank" href="{{url_for('delete_registration', student=student_validation)}}"><button type="button" class="btn btn-danger">Anmeldung löschen</button></a>
-      </div>
+  <div>
+    {% if not participant.student_validated %}
+    <a target="_blank" href="{{url_for('send_mail_again', student=student_validation)}}"><button type="button"
+        class="btn btn-warning">Bestätigungsmail Auszubildende(r) schicken</button></a>
     {% endif %}
+    {% if participant.student_validated and not participant.trainer_validated %}
+    <a target="_blank" href="{{url_for('send_mail_again', trainer=trainer_validation)}}"><button type="button"
+        class="btn btn-warning">Bestätigungsmail Ausbilder(in) schicken</button></a>
+    {% endif %}
+    <a target="_blank" href="{{url_for('delete_registration', student=student_validation)}}"><button type="button"
+        class="btn btn-danger">Anmeldung löschen</button></a>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}

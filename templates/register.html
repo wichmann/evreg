@@ -1,120 +1,124 @@
 {% extends 'templates/layout.html' %}
 
-{% block title %}Anmeldung zur Excellence Initiative 2021{% endblock %}
+{% block title %}Anmeldung zur Excellence Initiative 2023{% endblock %}
 
 {% block content %}
-        <div class="container">
-            <div class="page-header">
-                <h1>Anmeldung zur Excellence Initiative 2021</h1>
+<div class="container">
+    <div class="page-header">
+        <h1>Anmeldung zur Excellence Initiative 2023</h1>
+    </div>
+    <form class="form-horizontal" method="POST" action="">
+        {{ form.csrf_token() }}
+        <h3>Daten der Auszubildenden bzw. des Auszubildenden</h3>
+        <div>
+            <div class="form-group">
+                {{ form.firstname.label }}
+                {{ form.firstname(class="form-control") }}
             </div>
-            <form class="form-horizontal" method="POST" action="">
-                {{ form.csrf_token() }}
-                <h3>Daten der Auszubildenden bzw. des Auszubildenden</h3>
-                <div>
-                <div class="form-group">
-                    {{ form.firstname.label }}
-                    {{ form.firstname(class="form-control") }}
-                </div>
-                {% if form.firstname.errors %}
-                    <div class="errors">
-                    {% for error in form.firstname.errors %}
-                        {{ error }}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="form-group">
-                    {{ form.lastname.label }}
-                    {{ form.lastname(class="form-control") }}
-                </div>
-                {% if form.lastname.errors %}
-                    <div class="errors">
-                    {% for error in form.lastname.errors %}
-                        {{ error }}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="form-group">
-                    {{ form.classname.label }}
-                    {{ form.classname(class="form-control") }}
-                </div>
-                {% if form.classname.errors %}
-                    <div class="errors">
-                    {% for error in form.classname.errors %}
-                        {{ error }}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="form-group">
-                    {{ form.email_student.label }}
-                    {{ form.email_student(class="form-control") }}
-                </div>
-                {% if form.email_student.errors %}
-                    <div class="errors">
-                    {% for error in form.email_student.errors %}
-                        {{ error }}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-                </div>
-                
-                
-                <h3>Zustimmung des Ausbildungsbetriebs</h3> 
-                <div>
-                    <div class="form-group">
-                        {{ form.company_name.label }}
-                        {{ form.company_name(class="form-control") }}
-                    </div>
-                    {% if form.company_name.errors %}
-                        <div class="errors"><ul>
-                        {% for error in form.company_name.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                        </ul></div>
-                    {% endif %}
-                    <div class="form-group">
-                        {{ form.trainer_name.label }}
-                        {{ form.trainer_name(class="form-control") }}
-                    </div>
-                    {% if form.trainer_name.errors %}
-                        <div class="errors"><ul>
-                        {% for error in form.trainer_name.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                        </ul></div>
-                    {% endif %}
-                <div class="form-group">
-                    {{ form.email_trainer.label }}
-                    {{ form.email_trainer(class="form-control") }}
-                </div>
-                {% if form.email_trainer.errors %}
-                    <div class="errors">
-                    {% for error in form.email_trainer.errors %}
-                        {{ error }}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-                </div>
-
-                {% if form.recaptcha %}
-                <div class="form-group">
-                    {{ form.recaptcha }}
-                    {% if form.email_trainer.errors %}
-                    <div class="errors">
-                    {% for error in form.recaptcha.errors %}
-                        {% if error == 'The response parameter is missing.' %}
-                            Captcha wurde nicht gelöst!
-                        {% else %}
-                            {{ error }}
-                        {% endif %}
-                    {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endif %}
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-primary")}}
-                </div>
-            </form>
+            {% if form.firstname.errors %}
+            <div class="errors">
+                {% for error in form.firstname.errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.lastname.label }}
+                {{ form.lastname(class="form-control") }}
+            </div>
+            {% if form.lastname.errors %}
+            <div class="errors">
+                {% for error in form.lastname.errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.classname.label }}
+                {{ form.classname(class="form-control") }}
+            </div>
+            {% if form.classname.errors %}
+            <div class="errors">
+                {% for error in form.classname.errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.email_student.label }}
+                {{ form.email_student(class="form-control") }}
+            </div>
+            {% if form.email_student.errors %}
+            <div class="errors">
+                {% for error in form.email_student.errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
+
+
+        <h3>Zustimmung des Ausbildungsbetriebs</h3>
+        <div>
+            <div class="form-group">
+                {{ form.company_name.label }}
+                {{ form.company_name(class="form-control") }}
+            </div>
+            {% if form.company_name.errors %}
+            <div class="errors">
+                <ul>
+                    {% for error in form.company_name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.trainer_name.label }}
+                {{ form.trainer_name(class="form-control") }}
+            </div>
+            {% if form.trainer_name.errors %}
+            <div class="errors">
+                <ul>
+                    {% for error in form.trainer_name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.email_trainer.label }}
+                {{ form.email_trainer(class="form-control") }}
+            </div>
+            {% if form.email_trainer.errors %}
+            <div class="errors">
+                {% for error in form.email_trainer.errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% if form.recaptcha %}
+        <div class="form-group">
+            {{ form.recaptcha }}
+            {% if form.email_trainer.errors %}
+            <div class="errors">
+                {% for error in form.recaptcha.errors %}
+                {% if error == 'The response parameter is missing.' %}
+                Captcha wurde nicht gelöst!
+                {% else %}
+                {{ error }}
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary")}}
+        </div>
+    </form>
+</div>
 
 {% endblock %}
