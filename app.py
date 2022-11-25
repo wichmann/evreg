@@ -74,7 +74,7 @@ class RegisterStudentForm(FlaskForm):
     email_trainer = StringField(label=('Email-Adresse Ausbilder(in)'), 
                                 validators=[DataRequired(), Email(message='Keine gültige Email-Adresse!'), Length(max=120)])
     recaptcha = RecaptchaField()
-    submit = SubmitField(label=('Submit'))
+    submit = SubmitField('Anmelden')
 
 
 def register_new_student(student_validation, firstname, lastname, classname, email_student, email_trainer, company_name, trainer_name):
@@ -125,7 +125,6 @@ def download_list():
     return abort(403)
 
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def index():
     form = RegisterStudentForm()
@@ -139,7 +138,6 @@ def index():
                                  form.email_trainer, form.company_name, form.trainer_name)
             return redirect(url_for('validate_student', student=student_validation.hex, firsttime=True))
     return render_template('templates/register.html', form=form)
-
 
 
 @app.route('/validate_student', methods=['GET'])
