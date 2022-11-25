@@ -98,6 +98,11 @@ def contact():
     return render_template('templates/contact.html')
 
 
+@app.route('/impressum', methods=['GET'])
+def impressum():
+    return render_template('templates/impressum.html')
+
+
 @app.route('/list', methods=['GET'])
 def list_participants():
     list_of_participants = []
