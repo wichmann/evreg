@@ -1,27 +1,28 @@
 body {
-  background: rgb(248, 248, 219);
+  background: rgb(255, 255, 243);
   font-family: "Noto Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
 }
 
 h1 {
   color: #363a40;
+  font-size: 175%;
 }
 
 .footer {
-    position: fixed;
-    width: 100%;
-    text-align: center;
-    background: #edf2f8;
-    padding: 15px;
-    box-sizing: border-box;
-    min-height: 15px;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  background: #f1f4f7;
+  padding: 15px;
+  box-sizing: border-box;
+  min-height: 15px;
 }
 
 .initial-number {
   padding: 2px 5px;
   margin: 5px;
-  border-radius:8px;
+  border-radius: 8px;
   color: white;
   border: rgb(110, 138, 180);
   background-color: rgb(110, 138, 180);
@@ -30,17 +31,17 @@ h1 {
 }
 
 .errors {
-    padding: 5px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    list-style: none;
-    background: #fcd2d9;
-    border-radius: 4px;
-    border-top: 0;
-    color: #8d7575;
-    height: fit-content;
+  padding: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  list-style: none;
+  background: #fcd2d9;
+  border-radius: 4px;
+  border-top: 0;
+  color: #8d7575;
+  height: fit-content;
 }
 
 .success {
@@ -70,19 +71,19 @@ h1 {
 
 #mainblock {
   margin-top: 50px;
-  margin-bottom: 250px;
+  margin-bottom: 200px;
 }
 
-#footer-text{
-  display: inline-block; 
+#footer-text {
+  display: inline-block;
 }
 
 #school-logo-right {
-  float: right;  
+  float: right;
 }
 
 #school-logo-left {
-  float: left;  
+  float: left;
 }
 
 label {
@@ -92,7 +93,9 @@ label {
   font-weight: 400;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   padding: 10px 13px;
   margin-bottom: 5px;
   border-radius: 2px;
