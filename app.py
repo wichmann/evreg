@@ -37,7 +37,7 @@ csrf = CSRFProtect()
 def init_app():
     """Initialize the core application."""
     app = Flask(__name__, template_folder='.')
-    app.config['FLASK_ENV'] = 'development'
+    app.config['FLASK_DEBUG'] = 1
     app.config['DEBUG'] = True
     app.config['SECRET_KEY'] = config.SECRET_KEY
     app.config['RECAPTCHA_PUBLIC_KEY'] = config.RECAPTCHA_PUBLIC_KEY
@@ -46,6 +46,7 @@ def init_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config['WTF_CSRF_SSL_STRICT'] = False
     app.config['ENLIST_OPEN'] = config.ENLIST_OPEN
+    app.config['SHOW_LIST_PASSWORD'] = config.SHOW_LIST_PASSWORD
 
     csrf.init_app(app)
     db.init_app(app)
