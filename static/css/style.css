@@ -1,5 +1,5 @@
 body {
-  background: rgb(255, 255, 243);
+  background: rgb(255, 255, 255);
   font-family: "Noto Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
 }
@@ -9,14 +9,24 @@ h1 {
   font-size: 175%;
 }
 
+.navbar {
+  border-bottom: 1px solid #ccc;
+}
+
+.nav {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
 .footer {
   position: fixed;
   width: 100%;
   text-align: center;
-  background: #f1f4f7;
+  background: #ffffff;
   padding: 15px;
   box-sizing: border-box;
   min-height: 15px;
+  border-top: 1px solid #ccc;
 }
 
 .initial-number {
