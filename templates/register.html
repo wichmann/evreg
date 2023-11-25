@@ -10,7 +10,7 @@
     <form class="form-horizontal" method="POST" action="">
         {{ form.csrf_token() }}
         <h3>Daten der Auszubildenden bzw. des Auszubildenden</h3>
-        <div>
+        <div id="studentdataform">
             <div class="form-group">
                 {{ form.firstname.label }}
                 {{ form.firstname(class="form-control") }}
@@ -59,7 +59,7 @@
 
 
         <h3>Zustimmung des Ausbildungsbetriebs</h3>
-        <div>
+        <div id="companydataform">
             <div class="form-group">
                 {{ form.company_name.label }}
                 {{ form.company_name(class="form-control") }}
@@ -99,35 +99,39 @@
             {% endif %}
         </div>
 
-        {% if form.recaptcha %}
-        <div class="form-group">
-            {{ form.recaptcha }}
-            {% if form.email_trainer.errors %}
-            <div class="errors">
-                {% for error in form.recaptcha.errors %}
-                {% if error == 'The response parameter is missing.' %}
-                Captcha wurde nicht gelöst!
-                {% else %}
-                {{ error }}
+        <div id="infoform">
+            {% if form.recaptcha %}
+            <div class="form-group">
+                {{ form.recaptcha }}
+                {% if form.email_trainer.errors %}
+                <div class="errors">
+                    {% for error in form.recaptcha.errors %}
+                    {% if error == 'The response parameter is missing.' %}
+                    Captcha wurde nicht gelöst!
+                    {% else %}
+                    {{ error }}
+                    {% endif %}
+                    {% endfor %}
+                </div>
                 {% endif %}
-                {% endfor %}
             </div>
             {% endif %}
-        </div>
-        {% endif %}
-        <div class="form-group">
-            <p>Mit dem Absenden des Formulars <strong>melden Sie sich zur Excellence Initiative an und stimmen der
-            dazu notwendigen Datenverarbeitung zu.</strong></p>
-            <p>Alle erhobenen Daten werden ausschließlich zum Zweck der Organisation und Durchführung der
-            Excellence Initiative gespeichert und verwendet. Ihre Daten werden nach abschließender Bearbeitung
-            gelöscht.</p>
-            <p>Nach dem Absenden des Formulars bekommen Sie eine E-Mail mit einem Bestätigungslink, den Sie
-            anklicken müssen, um Ihre Email-Adresse zu bestätigen. Anschließend bekommt Ihre Ausbilderin bzw. Ihr
-            Ausbilder eine E-Mail. Durch Klick auf den enthaltenen Link stimmt die Ausbilderin bzw. der Ausbilder
-            der Teilnahme an der Excellence Initiative zu.</p>
-        </div>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-primary") }}
+            <div class="form-group">
+                <p>Mit dem Absenden des Formulars <strong>melden Sie sich zur Excellence Initiative an und stimmen der
+                        dazu notwendigen Datenverarbeitung zu.</strong></p>
+                <p>Alle erhobenen Daten werden ausschließlich zum Zweck der Organisation und Durchführung der
+                    Excellence Initiative gespeichert und verwendet. Ihre Daten werden nach abschließender Bearbeitung
+                    gelöscht.</p>
+                <p>Nach dem Absenden des Formulars bekommen Sie eine E-Mail mit einem Bestätigungslink, den Sie
+                    anklicken müssen, um Ihre Email-Adresse zu bestätigen. Anschließend bekommt Ihre Ausbilderin bzw.
+                    Ihr
+                    Ausbilder eine E-Mail. Durch Klick auf den enthaltenen Link stimmt die Ausbilderin bzw. der
+                    Ausbilder
+                    der Teilnahme an der Excellence Initiative zu.</p>
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
         </div>
     </form>
 </div>

@@ -96,6 +96,11 @@ h1 {
   float: left;
 }
 
+#studentdataform, #companydataform, #infoform {
+  padding-left: 15px;
+  padding-right: 6em;
+}
+
 label {
   color: #5f6988;
   margin-bottom: 3px;
