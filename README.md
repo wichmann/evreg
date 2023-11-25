@@ -5,7 +5,7 @@ the student and the trainer.
 ## Usage
 To start the web app with the internal web server of Flask:
 
-    FLASK_ENV=development flask run
+    FLASK_DEBUG=True flask run
 
 Or run the App directly in the pipenv:
 
