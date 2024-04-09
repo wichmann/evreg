@@ -1,3 +1,5 @@
+[![Docker Image CI](https://github.com/wichmann/evreg/actions/workflows/docker-image.yml/badge.svg)](https://github.com/wichmann/evreg/actions/workflows/docker-image.yml)
+
 # evreg - Event Registration
 A simple web app to register for a school event and validate mail addresses of
 the student and the trainer.
