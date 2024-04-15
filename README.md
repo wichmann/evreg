@@ -1,5 +1,6 @@
 [![Docker Image CI](https://github.com/wichmann/evreg/actions/workflows/docker-image.yml/badge.svg)](https://github.com/wichmann/evreg/actions/workflows/docker-image.yml)
 [![Docker](https://github.com/wichmann/evreg/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/wichmann/evreg/actions/workflows/docker-publish.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](http://choosealicense.com/licenses/mit/)
 
 # evreg - Event Registration
 A simple web app to register for a school event and validate mail addresses of
