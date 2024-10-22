@@ -8,8 +8,7 @@ on:
     branches: ["master"]
 
 env:
-  DOCKER_IMAGE_NAME: my-image
-  DOCKER_REGISTRY_URL: myregistry.domain.com
+  DOCKER_IMAGE_NAME: evreg
 
 jobs:
   build:
@@ -19,19 +18,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Get the release version
-        # Source: https://dev.to/onticdani/automatically-build-docker-images-with-github-actions-3n8e
-        # i.e.: release/1.0.0 -> 1.0.0
-        id: strip-branch-name
-        run: |
-          release_version=$(echo "${{ github.ref }}" | sed 's/refs\/heads\/.*\///')
-          echo "Building release version $release_version"
-          echo "RELEASE_VERSION=$release_version" >> $GITHUB_ENV
-          shell: bash
-
       - name: Build the Docker image
-        #run: docker build . --file Dockerfile --tag my-image-name:${{github.ref_name}}
-        run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION
+        run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:${{github.ref_name}}
 
       - name: Create a latest image as well
         run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:latest
