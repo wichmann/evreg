@@ -16,7 +16,7 @@
   {% if firsttime is defined %}
   <div class="success">
     <h3>Erfolg!</h3>
-    <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2024 der Berufsbildenden Schulen Brinkstraße!
+    <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2025 der Berufsbildenden Schulen Brinkstraße!
     </p>
   </div>
   {% endif %}
@@ -69,7 +69,7 @@
         <span class="highlight-link"><a
             href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student',
             _external=True, student=student_validation)}}</a>
-          <button onclick="navigator.clipboard.writeText('{{url_for("validate_student", _external=True,
+          <button onclick="navigator.clipboard.writeText('{{url_for(" validate_student", _external=True,
             student=student_validation)}}');"><span style="font-size: large;"
               class="glyphicon glyphicon-copy"></span></button>
         </span>
