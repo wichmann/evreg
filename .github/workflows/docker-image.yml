@@ -1,7 +1,6 @@
 name: Build release Docker image and upload it to registry
 
 on:
-  workflow_dispatch:
   push:
     branches: ["master"]
   pull_request:
@@ -9,7 +8,6 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: evreg
-  DOCKER_REGISTRY_URL: ghcr.io
 
 jobs:
   build:
@@ -33,20 +31,3 @@ jobs:
 
       - name: Create a latest image as well
         run: docker tag $DOCKER_IMAGE_NAME:${{github.ref_name}} $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
-
-      # Push the images to the registry
-      - name: Push the Docker image with version number
-        run: docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:${{github.ref_name}}
-
-      - name: Push the latest tag
-        run: docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
-
-      # Remove the local images
-      - name: Remove the Docker image with version number
-        run: docker rmi $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:${{github.ref_name}}
-
-      - name: Remove the Docker image with latest tag
-        run: docker rmi $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
-
-      - name: Remove the local image
-        run: docker rmi $DOCKER_IMAGE_NAME:$RELEASE_VERSION
