@@ -34,6 +34,7 @@ from model import db, Participant
 
 csrf = CSRFProtect()
 
+
 def init_app():
     """Initialize the core application."""
     app = Flask(__name__, template_folder='.')
@@ -51,7 +52,7 @@ def init_app():
     csrf.init_app(app)
     db.init_app(app)
     with app.app_context():
-        db.create_all() 
+        db.create_all()
         return app
 
 
@@ -61,18 +62,18 @@ app = init_app()
 class RegisterStudentForm(FlaskForm):
     # build a HTML form corresponding to the data model in module model.py
     firstname = StringField(label=('Vorname:'),
-                           validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
+                            validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!')])
     lastname = StringField(label=('Nachname:'),
-                           validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
+                           validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!')])
     classname = StringField(label=('Klasse:'),
-                            validators=[DataRequired(), Length(min=4, max=8, message='Klassenbezeichnung muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
-    email_student = StringField(label=('Email-Adresse Auszubildende(r)'), 
+                            validators=[DataRequired(), Length(min=4, max=8, message='Klassenbezeichnung muss zwischen %(min)d und %(max)d Zeichen lang sein!')])
+    email_student = StringField(label=('Email-Adresse Auszubildende(r)'),
                                 validators=[DataRequired(), Email(message='Keine gültige Email-Adresse!'), Length(max=120)])
     company_name = StringField(label=('Name des Ausbildungsbetriebs:'),
-                               validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
+                               validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!')])
     trainer_name = StringField(label=('Name der Ausbilderin bzw. des Ausbilders:'),
-                               validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!') ])
-    email_trainer = StringField(label=('Email-Adresse Ausbilder(in)'), 
+                               validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!')])
+    email_trainer = StringField(label=('Email-Adresse Ausbilder(in)'),
                                 validators=[DataRequired(), Email(message='Keine gültige Email-Adresse!'), Length(max=120)])
     recaptcha = RecaptchaField()
     submit = SubmitField('Anmelden')
@@ -118,9 +119,11 @@ def download_list():
         list_of_participants = Participant.query.all()
         csv_file = StringIO()
         outcsv = csv.writer(csv_file)
-        outcsv.writerow([column.name for column in Participant.__mapper__.columns])
+        outcsv.writerow(
+            [column.name for column in Participant.__mapper__.columns])
         for p in list_of_participants:
-            outcsv.writerow([getattr(p, column.name) for column in Participant.__mapper__.columns])
+            outcsv.writerow([getattr(p, column.name)
+                            for column in Participant.__mapper__.columns])
         csv_file.seek(0)
         return send_file(BytesIO(csv_file.read().encode('utf-8')), attachment_filename='teilnehmerliste.csv')
     return abort(403)
@@ -131,8 +134,10 @@ def index():
     form = RegisterStudentForm()
     if form.validate_on_submit():
         # TODO: Add better check for valid class names?
-        p = Participant.query.filter_by(email_student=form.email_student.data).count()
-        form.email_student.errors.append('E-Mail-Adresse wurde bereits verwendet.')
+        p = Participant.query.filter_by(
+            email_student=form.email_student.data).count()
+        form.email_student.errors.append(
+            'E-Mail-Adresse wurde bereits verwendet.')
         if p == 0:
             student_validation = uuid.uuid4()
             register_new_student(student_validation, form.firstname, form.lastname, form.classname, form.email_student,
@@ -144,7 +149,8 @@ def index():
 @app.route('/validate_student', methods=['GET'])
 def validate_student():
     if 'student' in request.args:
-        p = Participant.query.filter_by(student_validation=request.args['student']).first()
+        p = Participant.query.filter_by(
+            student_validation=request.args['student']).first()
         if p:
             if 'firsttime' in request.args:
                 if not p.student_validated:
@@ -162,7 +168,8 @@ def validate_student():
 @app.route('/send_mail', methods=['GET'])
 def send_mail_again():
     if 'student' in request.args:
-        p = Participant.query.filter_by(student_validation=request.args['student']).first()
+        p = Participant.query.filter_by(
+            student_validation=request.args['student']).first()
         if p:
             # send mail
             mail.send_mail(p, mail.MessageType.STUDENT)
@@ -170,13 +177,14 @@ def send_mail_again():
             return render_template('templates/simple_message.html', success=True, message='Die Bestätigungsmail wurde ein weiteres Mal versendet.',
                                    title='Bestätigungsmail versenden')
     elif 'trainer' in request.args:
-        p = Participant.query.filter_by(trainer_validation=request.args['trainer']).first()
+        p = Participant.query.filter_by(
+            trainer_validation=request.args['trainer']).first()
         if p:
             # send mail
             mail.send_mail(p, mail.MessageType.TRAINER)
             # return page with button to resend mail for student validation
             return render_template('templates/simple_message.html', success=True, message='Die Bestätigungsmail wurde ein weiteres Mal versendet.',
-                                   title='Bestätigungsmail versenden')        
+                                   title='Bestätigungsmail versenden')
     return render_template('templates/simple_message.html', success=False, message='Die Bestätigungsmail konnte nicht versendet werden!',
                            title='Bestätigungsmail versenden')
 
@@ -184,7 +192,8 @@ def send_mail_again():
 @app.route('/do_validate_student', methods=['GET'])
 def do_validate_student():
     if 'student' in request.args:
-        p = Participant.query.filter_by(student_validation=request.args['student']).first()
+        p = Participant.query.filter_by(
+            student_validation=request.args['student']).first()
         if p:
             print('{} was validated!'.format(p))
             # store validation in database
@@ -201,7 +210,8 @@ def do_validate_student():
 @app.route('/do_validate_trainer', methods=['GET'])
 def do_validate_trainer():
     if 'trainer' in request.args:
-        p = Participant.query.filter_by(trainer_validation=request.args['trainer']).first()
+        p = Participant.query.filter_by(
+            trainer_validation=request.args['trainer']).first()
         if p:
             print('{} was validated!'.format(p))
             # store validation in database
@@ -216,7 +226,8 @@ def do_validate_trainer():
 @app.route('/delete_registration', methods=['GET'])
 def delete_registration():
     if 'student' in request.args:
-        p = Participant.query.filter_by(student_validation=request.args['student']).first()
+        p = Participant.query.filter_by(
+            student_validation=request.args['student']).first()
         if p:
             db.session.delete(p)
             db.session.commit()
