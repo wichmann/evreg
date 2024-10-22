@@ -9,17 +9,44 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: evreg
+  DOCKER_REGISTRY_URL: ghcr.io
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Source: https://dev.to/onticdani/automatically-build-docker-images-with-github-actions-3n8e
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # Build Docker images
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:${{github.ref_name}}
 
       - name: Create a latest image as well
         run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:latest
+
+      # Tag the Docker Images
+      - name: Tag the image for the private registry $DOCKER_REGISTRY_URL
+        run: docker tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:$RELEASE_VERSION
+
+      - name: Create a latest image as well
+        run: docker tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
+
+      # Push the images to the registry
+      - name: Push the Docker image with version number
+        run: docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:${{github.ref_name}}
+
+      - name: Push the latest tag
+        run: docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
+
+      # Remove the local images
+      - name: Remove the Docker image with version number
+        run: docker rmi $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:${{github.ref_name}}
+
+      - name: Remove the Docker image with latest tag
+        run: docker rmi $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
+
+      - name: Remove the local image
+        run: docker rmi $DOCKER_IMAGE_NAME:$RELEASE_VERSION
