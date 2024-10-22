@@ -1,10 +1,7 @@
-name: Build release Docker image and upload it to registry
+name: Build release Docker image
 
 on:
-  push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
+  workflow_dispatch:
 
 env:
   DOCKER_IMAGE_NAME: evreg
@@ -13,7 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Source: https://dev.to/onticdani/automatically-build-docker-images-with-github-actions-3n8e
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,10 +20,3 @@ jobs:
 
       - name: Create a latest image as well
         run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:latest
-
-      # Tag the Docker Images
-      - name: Tag the image for the private registry $DOCKER_REGISTRY_URL
-        run: docker tag $DOCKER_IMAGE_NAME:${{github.ref_name}} $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:${{github.ref_name}}
-
-      - name: Create a latest image as well
-        run: docker tag $DOCKER_IMAGE_NAME:${{github.ref_name}} $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
