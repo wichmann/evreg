@@ -105,6 +105,11 @@ def impressum():
     return render_template('templates/impressum.html')
 
 
+@app.route('/flyer', methods=['GET'])
+def download_flyer():
+    return send_file('static/flyer.pdf')
+
+
 @app.route('/list', methods=['GET'])
 def list_participants():
     list_of_participants = []
