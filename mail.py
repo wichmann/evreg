@@ -77,6 +77,6 @@ def send_mail(participant, message_type):
         print('Error!!!')
 
     # send the message via SMTP server.
-    with smtplib.SMTP_SSL(config.EMAIL_SERVER_HOST, port=config.EMAIL_SERVER_PORT, timeout=2) as s:
+    with smtplib.SMTP_SSL(config.EMAIL_SERVER_HOST, port=config.EMAIL_SERVER_PORT, timeout=5) as s:
         s.login(user=config.EMAIL_SERVER_USER, password = config.EMAIL_SERVER_PASSWORD)
         s.send_message(msg)
