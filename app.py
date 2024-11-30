@@ -130,7 +130,7 @@ def download_list():
             outcsv.writerow([getattr(p, column.name)
                             for column in Participant.__mapper__.columns])
         csv_file.seek(0)
-        return send_file(BytesIO(csv_file.read().encode('utf-8')), attachment_filename='teilnehmerliste.csv')
+        return send_file(BytesIO(csv_file.read().encode('utf-8')), download_name='teilnehmerliste.csv')
     return abort(403)
 
 
