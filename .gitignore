@@ -229,3 +229,4 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,visualstudiocode
 
 participants.db
+config.actual.py

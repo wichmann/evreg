@@ -9,7 +9,7 @@
     </div>
     <form class="form-horizontal" method="POST" action="">
         {{ form.csrf_token() }}
-        <h3>Daten der Auszubildenden bzw. des Auszubildenden</h3>
+        <h5>Daten der Auszubildenden bzw. des Auszubildenden</h5>
         <div id="studentdataform">
             <div class="form-group">
                 {{ form.firstname.label }}
@@ -57,8 +57,7 @@
             {% endif %}
         </div>
 
-
-        <h3>Zustimmung des Ausbildungsbetriebs</h3>
+        <h5>Zustimmung des Ausbildungsbetriebs</h5>
         <div id="companydataform">
             <div class="form-group">
                 {{ form.company_name.label }}
@@ -118,9 +117,9 @@
                 {% endif %}
             </div>
             {% endif %}
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <p>Mit dem Absenden des Formulars <strong>melden Sie sich zur Excellence Initiative an und stimmen der
-                        dazu notwendigen Datenverarbeitung zu.</strong></p>
+                    dazu notwendigen Datenverarbeitung zu.</strong></p>
                 <p>Alle erhobenen Daten werden ausschließlich zum Zweck der Organisation und Durchführung der
                     Excellence Initiative gespeichert und verwendet. Ihre Daten werden nach abschließender Bearbeitung
                     gelöscht.</p>

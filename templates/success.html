@@ -14,16 +14,16 @@
   </div>
   {% else %}
   {% if firsttime is defined %}
-  <div class="success">
-    <h3>Erfolg!</h3>
-    <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2026 der Berufsbildenden Schulen Brinkstraße!
-    </p>
+  <div class="bg-success p-3 my-3 text-white rounded">
+    <h5>Erfolg!</h5>
+    <p>Sie haben sich erfolgreich angemeldet für die Excellence Initiative 2026 der Berufsbildenden Schulen Brinkstraße!</p>
   </div>
   {% endif %}
   <div class="card mb-3">
-    <div class="card-header"><span class="initial-number">1.</span> Anmeldung wurde gespeichert.
-      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;">
-        <i class="bi bi-check-circle"></i></span>
+    <div class="card-header"><strong><span class="initial-number">1.</span>Anmeldung wurde gespeichert</strong>
+      <span class="check-success">
+        <i class="bi bi-check-circle"></i>
+      </span>
     </div>
     <div class="card-body">
       <ul id="participant">
@@ -60,8 +60,8 @@
   </div>
 
   <div class="card mb-3">
-    <div class="card-header"><span class="initial-number">2.</span> Speichern des Links dieser Seite
-      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;">
+    <div class="card-header"><strong><span class="initial-number">2.</span>Speichern des Links dieser Seite</strong>
+      <span class="check-success">
         <i class="bi bi-check-circle"></i></span>
     </div>
     <div class="card-body">
@@ -69,9 +69,12 @@
         <span class="highlight-link"><a
             href="{{url_for('validate_student', _external=True, student=student_validation)}}">{{url_for('validate_student',
             _external=True, student=student_validation)}}</a>
-          <button onclick="navigator.clipboard.writeText('{{url_for("validate_student", _external=True,
-            student=student_validation)}}');"><span style="font-size: large;">
-              <i class="bi bi-clipboard"></i></span></button>
+          <button type="button" class="btn btn-secondary btn-sm"
+            onclick="navigator.clipboard.writeText('{{url_for("validate_student", _external=True,student=student_validation)}}');">
+            <span style="font-size: large; background-color: transparent;">
+              <i class="bi bi-clipboard"></i>
+            </span>
+          </button>
         </span>
       </p>
       <p>Damit können Sie später die gespeicherten Daten überprüfen, sich abmelden oder die Bestätigungsmail noch einmal
@@ -80,12 +83,12 @@
   </div>
 
   <div class="card mb-3">
-    <div class="card-header"><span class="initial-number">3.</span> Bestätigung der eigenen Email-Adresse
+    <div class="card-header"><strong><span class="initial-number">3.</span> Bestätigung der eigenen Email-Adresse</strong>
       {% if participant.student_validated %}
-      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;">
+      <span class="check-success">
         <i class="bi bi-check-circle"></i></span>
       {% else %}
-      <span style="color: rgb(255, 0, 0);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;">
+      <span class="check-fail">
         <i class="bi bi-x-circle"></i></span>
       {% endif %}
     </div>
@@ -96,13 +99,13 @@
   </div>
 
   <div class="card mb-3">
-    <div class="card-header"><span class="initial-number">4.</span> Bestätigung der der Anmeldung durch die
-      Ausbilderin bzw. den Ausbilder
+    <div class="card-header"><strong><span class="initial-number">4.</span>Bestätigung der der Anmeldung durch die
+      Ausbilderin bzw. den Ausbilder</strong>
       {% if participant.trainer_validated %}
-      <span style="color: rgb(117, 190, 8);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;">
+      <span class="check-success">
         <i class="bi bi-check-circle"></i></span>
       {% else %}
-      <span style="color: rgb(255, 0, 0);text-shadow: 1px 1px #797979;font-weight: bold;font-size: large;">
+      <span class="check-fail">
         <i class="bi bi-x-circle"></i></span>
       {% endif %}
     </div>
