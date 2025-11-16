@@ -48,5 +48,10 @@ could look like this:
 * email-validator
 * flask
 * flask-wtf
-* flask-bootstrap
 * flask-sqlalchemy
+
+## Licenses
+This app uses the font "Raleway". Copyright 2010 The Raleway Project Authors
+(impallari@gmail.com), with Reserved Font Name "Raleway". This Font Software is
+licensed under the SIL Open Font License, Version 1.1. This license is
+available with a FAQ at: https://openfontlicense.org

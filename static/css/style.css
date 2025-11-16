@@ -1,6 +1,14 @@
+@font-face {
+  font-family: "Raleway";
+  src: url("../fonts/Raleway-VariableFont_wght.ttf");
+}
+
 body {
   background: rgb(255, 255, 255);
-  font-family: 'Ubuntu',-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Raleway",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-optical-sizing: auto;
+  font-weight:400;
+  font-style: normal;
   margin: 0;
 }
 
@@ -81,8 +89,9 @@ h1 {
 }
 
 #mainblock {
-  margin-top: 50px;
-  margin-bottom: 200px;
+  /* Add top spacing so content isn't hidden behind the fixed-top navbar */
+  margin-top: 100px;
+  margin-bottom: 175px;
 }
 
 #footer-text {
