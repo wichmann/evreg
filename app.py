@@ -9,7 +9,6 @@ Requirements:
 * flask
 * flask-wtf
 * flask-sqlalchemy
-* flask-bootstrap
 
 Sources:
  * https://hackersandslackers.com/flask-wtforms-forms/

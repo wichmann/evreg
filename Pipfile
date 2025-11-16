@@ -7,7 +7,6 @@ name = "pypi"
 flask-wtf = "*"
 email-validator = "*"
 flask-sqlalchemy = "*"
-flask-bootstrap = "*"
 flask = "*"
 
 [dev-packages]
