@@ -23,6 +23,16 @@ h1 {
   background-color: white;
 }
 
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 .nav {
   padding-top: 4px;
   padding-bottom: 4px;
