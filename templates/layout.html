@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Bootstrap 5.3.8 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sn1PVcF/Q4u6RrIqAW3lHv1PBNt0MxmvgIQUG3cPYU6sN/cGLJpbV3fUdLVrSdDO" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
@@ -20,31 +19,25 @@
 
 <body>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">
-                    <span><img alt="Logo der Excellence Initiative" width="25" style="margin: 3px 5px"
-                            src="{{url_for('static', filename='images/logo.png')}}">
-                        Excellence Initiative Industrie 4.0</span>
-                </a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/info">Informationen</a></li>
-                    {% if config['ENLIST_OPEN'] %} <li><a href="/register">Anmeldung</a></li> {% endif %}
-                    <li><a href="/contact">Ansprechpartner</a></li>
-                    <li><a href="/impressum"">Impressum</a></li>
+            <a class="navbar-brand" href="/">
+                <span><img alt="Logo der Excellence Initiative" width="25" style="margin: 3px 5px"
+                        src="{{url_for('static', filename='images/logo.png')}}">
+                    Excellence Initiative Industrie 4.0</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/info">Informationen</a></li>
+                    {% if config['ENLIST_OPEN'] %} <li class="nav-item"><a class="nav-link" href="/register">Anmeldung</a></li> {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/contact">Ansprechpartner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/impressum">Impressum</a></li>
                 </ul>
             </div>
-            <!--/.nav-collapse -->
         </div>
     </nav>
 
@@ -55,7 +48,7 @@
                 {% block content %}{% endblock %}
             </div>
 
-            <div class="navbar-fixed-bottom footer">
+            <div class="fixed-bottom footer">
                 <div id="footer-text">
                     <h4>Weitere Informationen zum Thema Industrie 4.0 und zur Excellence Initiative unter <a
                             target="_blank" href="http://i40.brinkstr.de">http://i40.brinkstr.de</a></h4>
@@ -66,14 +59,9 @@
 
         </div>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        <!-- Bootstrap 5.3.8 Bundle JS (includes Popper) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
 </body>
 
