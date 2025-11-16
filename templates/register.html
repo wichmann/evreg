@@ -1,11 +1,11 @@
 {% extends 'templates/layout.html' %}
 
-{% block title %}Anmeldung zur Excellence Initiative 2025{% endblock %}
+{% block title %}Anmeldung zur Excellence Initiative 2026{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="page-header">
-        <h1>Anmeldung zur Excellence Initiative 2025</h1>
+        <h1>Anmeldung zur Excellence Initiative 2026</h1>
     </div>
     <form class="form-horizontal" method="POST" action="">
         {{ form.csrf_token() }}
@@ -101,6 +101,8 @@
 
         <div id="infoform">
             {% if form.recaptcha %}
+            <noscript>Zur Verhinderung von automatischen Anmeldungen müssen Sie Javascript aktivieren, um dieses Formular absenden zu können.</noscript>
+
             <div class="form-group">
                 {{ form.recaptcha }}
                 {% if form.email_trainer.errors %}

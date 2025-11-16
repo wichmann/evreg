@@ -3,7 +3,7 @@
 SECRET_KEY = ''
 RECAPTCHA_PUBLIC_KEY = ''
 RECAPTCHA_PRIVATE_KEY = ''
-SQLALCHEMY_DATABASE_URI = 'sqlite:///participants.db' # 'sqlite:///:memory:'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///participants.db'
 
 EMAIL_SENDER_NAME = ''
 EMAIL_SENDER_USER = ''
