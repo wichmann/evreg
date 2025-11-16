@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 flask-wtf = "*"
 email-validator = "*"
 flask-sqlalchemy = "*"
 flask-bootstrap = "*"
+flask = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.12"
+python_version = "3.13"
