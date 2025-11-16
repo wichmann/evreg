@@ -20,11 +20,11 @@ student_validation_text = """Hallo {username},
 
 vielen Dank für das Interesse an der Excellence Initiative der BBS Brinkstraße.
         
-Zur Bestätigung der Anmeldung müssen Sie noch einmal den folgenden Link anklicken, um Ihre Email-Adresse zu bestätigen:
+Zur Bestätigung der Anmeldung klicken Sie bitte auf den folgenden Link, um Ihre Email-Adresse zu bestätigen:
 
     {validation_link}
 
-Nach dem Klick auf den Bestätigungslink wird als nächstes eine Email an Ihre Ausbilderin bzw. Ihren Ausbilder versandt, in der sie bzw er der Teilnahme zustimmen muss.
+Nach dem Klick auf den Bestätigungslink wird als nächstes eine Email an Ihre Ausbilderin bzw. Ihren Ausbilder versandt, in der sie bzw. er der Teilnahme zustimmen muss.
 
 Mit freundlichen Grüßen
 
@@ -33,7 +33,7 @@ Berufsbildende Schulen Brinkstraße
 
 trainer_validation_text = """Hallo {trainer_name},
 
-Ihre Auszubildende bzw. Ihr Auszubildender {username} hat sich für die Excellence Initiative der BBS Brinkstraße angemeldet. Dabei geht es um eine AG mit dem Thema "Weiterentwicklung einer Smart Factory und Abbildung der wesentliche Prinzipien des Produktionsprozesses mit einem Projektmanagement nach dem Kanban-Prinzip". Weitere Informationen finden Sie auf der Homepage unter dem Link {info_link}.
+Ihre Auszubildende bzw. Ihr Auszubildender {username} hat sich für die Excellence Initiative der BBS Brinkstraße angemeldet. Das ist eine AG mit dem Thema "Weiterentwicklung einer Smart Factory und Abbildung der wesentliche Prinzipien des Produktionsprozesses mit einem Projektmanagement nach dem Kanban-Prinzip". Weitere Informationen finden Sie auf der Homepage unter dem Link {info_link}.
         
 Eine Teilnahme bedeutet einen weiteren Berufsschultag für die Auszubildenden. Dazu ist natürlich Ihr Einverständnis notwendig!
         
