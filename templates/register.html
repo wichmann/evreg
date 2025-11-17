@@ -99,19 +99,16 @@
         </div>
 
         <div id="infoform">
-            {% if form.recaptcha %}
+            {% if form.frc_captcha_solution %}
             <noscript>Zur Verhinderung von automatischen Anmeldungen müssen Sie Javascript aktivieren, um dieses Formular absenden zu können.</noscript>
 
             <div class="form-group mt-3">
-                {{ form.recaptcha }}
-                {% if form.email_trainer.errors %}
+                {{ form.frc_captcha_solution }}
+                <div class="frc-captcha" data-sitekey="{{ config['FRIENDLY_CAPTCHA_SITEKEY'] }}" data-solution-field-name="frc_captcha_solution"></div>
+                {% if form.frc_captcha_solution.errors %}
                 <div class="errors">
-                    {% for error in form.recaptcha.errors %}
-                    {% if error == 'The response parameter is missing.' %}
-                    Captcha wurde nicht gelöst!
-                    {% else %}
+                    {% for error in form.frc_captcha_solution.errors %}
                     {{ error }}
-                    {% endif %}
                     {% endfor %}
                 </div>
                 {% endif %}

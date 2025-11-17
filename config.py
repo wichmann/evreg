@@ -1,8 +1,8 @@
 
 # set all config options and predefined constants for evreg
 SECRET_KEY = ''
-RECAPTCHA_PUBLIC_KEY = ''
-RECAPTCHA_PRIVATE_KEY = ''
+FRIENDLY_CAPTCHA_SITEKEY = ''
+FRIENDLY_CAPTCHA_SECRET = ''
 SQLALCHEMY_DATABASE_URI = 'sqlite:///participants.db'
 
 EMAIL_SENDER_NAME = ''
