@@ -60,12 +60,12 @@ app = init_app()
 
 
 def validate_friendly_captcha(form, field):
-    """Validate Friendly Captcha solution."""
+    """Validate Friendly Captcha solution using API v2."""
     solution = field.data
     if not solution:
         raise ValidationError('Captcha wurde nicht gelöst!')
     
-    # Verify the solution with Friendly Captcha API
+    # Verify the solution with Friendly Captcha API v2
     secret = app.config.get('FRIENDLY_CAPTCHA_SECRET')
     if not secret:
         # If no secret is configured, skip verification (for development)
@@ -73,7 +73,7 @@ def validate_friendly_captcha(form, field):
     
     try:
         response = requests.post(
-            'https://api.friendlycaptcha.com/api/v1/siteverify',
+            'https://api.friendlycaptcha.com/api/v2/captcha/siteverify',
             json={
                 'solution': solution,
                 'secret': secret,

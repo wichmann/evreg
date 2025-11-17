@@ -11,9 +11,9 @@ the student and the trainer.
 Before running the application, you need to configure it by editing `config.py`:
 
 1. Set a secure `SECRET_KEY` for session management
-2. Configure Friendly Captcha credentials:
+2. Configure Friendly Captcha v2 credentials:
    - `FRIENDLY_CAPTCHA_SITEKEY`: Your Friendly Captcha site key (get it from https://friendlycaptcha.com/)
-   - `FRIENDLY_CAPTCHA_SECRET`: Your Friendly Captcha API secret
+   - `FRIENDLY_CAPTCHA_SECRET`: Your Friendly Captcha API secret (v2)
 3. Configure email settings for sending validation emails
 4. Set `SHOW_LIST_PASSWORD` for protected access to participant lists
 5. Set `ENLIST_OPEN` to `True` to enable registration
