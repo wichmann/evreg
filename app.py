@@ -17,14 +17,15 @@ Sources:
 
 import csv
 import uuid
+import requests
 from io import StringIO, BytesIO
 
 from flask import Flask, render_template, redirect, request, make_response, abort, send_file
 from flask.helpers import url_for
-from flask_wtf import FlaskForm, RecaptchaField
+from flask_wtf import FlaskForm
 from flask_wtf.csrf import CSRFProtect
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length, Email
+from wtforms import StringField, SubmitField, HiddenField
+from wtforms.validators import DataRequired, Length, Email, ValidationError
 
 import mail
 import config
@@ -40,8 +41,8 @@ def init_app():
     app.config['FLASK_DEBUG'] = 1
     app.config['DEBUG'] = True
     app.config['SECRET_KEY'] = config.SECRET_KEY
-    app.config['RECAPTCHA_PUBLIC_KEY'] = config.RECAPTCHA_PUBLIC_KEY
-    app.config['RECAPTCHA_PRIVATE_KEY'] = config.RECAPTCHA_PRIVATE_KEY
+    app.config['FRIENDLY_CAPTCHA_SITEKEY'] = config.FRIENDLY_CAPTCHA_SITEKEY
+    app.config['FRIENDLY_CAPTCHA_SECRET'] = config.FRIENDLY_CAPTCHA_SECRET
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config['WTF_CSRF_SSL_STRICT'] = False
@@ -56,6 +57,36 @@ def init_app():
 
 
 app = init_app()
+
+
+def validate_friendly_captcha(form, field):
+    """Validate Friendly Captcha solution using API v2."""
+    solution = field.data
+    if not solution:
+        raise ValidationError('Captcha wurde nicht gelöst!')
+    
+    # Verify the solution with Friendly Captcha API v2
+    secret = app.config.get('FRIENDLY_CAPTCHA_SECRET')
+    if not secret:
+        # If no secret is configured, skip verification (for development)
+        return
+    
+    try:
+        response = requests.post(
+            'https://global.frcapi.com/api/v2/captcha/siteverify',
+            json={
+                'solution': solution,
+                'secret': secret,
+                'sitekey': app.config.get('FRIENDLY_CAPTCHA_SITEKEY')
+            },
+            timeout=10
+        )
+        
+        result = response.json()
+        if not result.get('success'):
+            raise ValidationError('Captcha-Überprüfung fehlgeschlagen!')
+    except requests.RequestException:
+        raise ValidationError('Captcha-Überprüfung fehlgeschlagen!')
 
 
 class RegisterStudentForm(FlaskForm):
@@ -74,7 +105,7 @@ class RegisterStudentForm(FlaskForm):
                                validators=[DataRequired(), Length(min=3, max=80, message='Name muss zwischen %(min)d und %(max)d Zeichen lang sein!')])
     email_trainer = StringField(label=('Email-Adresse Ausbilder(in)'),
                                 validators=[DataRequired(), Email(message='Keine gültige Email-Adresse!'), Length(max=120)])
-    recaptcha = RecaptchaField()
+    frc_captcha_solution = HiddenField(validators=[validate_friendly_captcha])
     submit = SubmitField('Anmelden')
 
 

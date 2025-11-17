@@ -6,6 +6,18 @@
 A simple web app to register for a school event and validate mail addresses of
 the student and the trainer.
 
+## Configuration
+
+Before running the application, you need to configure it by editing `config.py`:
+
+1. Set a secure `SECRET_KEY` for session management
+2. Configure Friendly Captcha v2 credentials:
+   - `FRIENDLY_CAPTCHA_SITEKEY`: Your Friendly Captcha site key (get it from https://friendlycaptcha.com/)
+   - `FRIENDLY_CAPTCHA_SECRET`: Your Friendly Captcha API secret (v2)
+3. Configure email settings for sending validation emails
+4. Set `SHOW_LIST_PASSWORD` for protected access to participant lists
+5. Set `ENLIST_OPEN` to `True` to enable registration
+
 ## Usage
 To start the web app with the internal web server of Flask:
 
@@ -49,6 +61,7 @@ could look like this:
 * flask
 * flask-wtf
 * flask-sqlalchemy
+* requests (for Friendly Captcha verification)
 
 ## Licenses
 This app uses the font "Raleway". Copyright 2010 The Raleway Project Authors
