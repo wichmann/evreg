@@ -103,7 +103,7 @@
             <noscript>Zur Verhinderung von automatischen Anmeldungen müssen Sie Javascript aktivieren, um dieses Formular absenden zu können.</noscript>
 
             <div class="form-group mt-3">
-                <div class="frc-captcha" data-sitekey="{{ config['FRIENDLY_CAPTCHA_SITEKEY'] }}" data-solution-field-name="frc_captcha_solution" data-start="auto"></div>
+                <div class="frc-captcha" data-sitekey="{{ config['FRIENDLY_CAPTCHA_SITEKEY'] }}" data-solution-field-name="frc_captcha_solution"></div>
                 {% if form.frc_captcha_solution.errors %}
                 <div class="errors">
                     {% for error in form.frc_captcha_solution.errors %}
