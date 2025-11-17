@@ -73,7 +73,7 @@ def validate_friendly_captcha(form, field):
     
     try:
         response = requests.post(
-            'https://api.friendlycaptcha.com/api/v2/captcha/siteverify',
+            'https://global.frcapi.com/api/v2/captcha/siteverify',
             json={
                 'solution': solution,
                 'secret': secret,
